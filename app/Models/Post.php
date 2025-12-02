@@ -1,6 +1,9 @@
 <?php
 
 namespace App\Models;
+
+use Illuminate\Support\Arr;
+
 class Post {
     public static function all() {
         return [
@@ -24,6 +27,23 @@ class Post {
         ]
         ];
     }
+    //kalau di luar kelas post::all(), dikls yg sama (static) static::all()
+    public static function find($slug): array 
+    {
+        $post = Arr::first(static::all(),fn($post) => $post['slug'] == $slug);
+        if (! $post){
+            abort(404);
+        } else {
+            return $post;
+        }
+    } 
 }
+
+    // public static function find($slug){
+    //     return Arr::first(static::all(), function($post) use ($slug){
+    //     return $post['slug'] == $slug;
+    // }); //akan nyari array yg pertama kali ketemu berdasarkan kriteria tertentu
+    // }
+
 
 ?>

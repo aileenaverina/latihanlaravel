@@ -21,9 +21,7 @@ Route::get('/contact', function () {
 Route::get('/posts/{slug}', function ($slug) {
     $posts = Post::all();
 
-    $post = Arr::first($posts, function($post) use ($slug){
-        return $post['slug'] == $slug;
-    }); //akan nyari array yg pertama kali ketemu berdasarkan kriteria tertentu
+    $post = Post::find($slug);
 
     return view('post', ['title' => 'Single Post', 'post' => $post]);
 });
