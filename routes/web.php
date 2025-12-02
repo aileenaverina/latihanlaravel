@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Post;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Route;
 
@@ -10,26 +11,7 @@ Route::get('/about', function () {
     return view('about', ['title' => 'About Us', 'nama' => 'Aileen']);
 });
 Route::get('/posts', function () {
-    return view('posts', ['title' => 'Our Blog', 'posts' => [
-        [
-            'id' => 1,
-            'slug' => 'Judul-artikel-1',
-            'title' => 'Judul',
-            'author' => 'Aileen',
-            'body' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat porro officiis ea eos quibusdam ab
-                laborum fuga repellendus maiores nemo tenetur, provident vitae minus ad? Beatae vitae reprehenderit
-                doloremque aut!'
-        ],
-        [
-            'id' => 2,
-            'slug' => 'Judul-artikel-2',
-            'title' => 'Judul',
-            'author' => 'Aileen',
-            'body' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat porro officiis ea eos quibusdam ab
-                laborum fuga repellendus maiores nemo tenetur, provident vitae minus ad? Beatae vitae reprehenderit
-                doloremque aut!'
-        ]
-    ]]);
+    return view('posts', ['title' => 'Our Blog', 'posts' => Post::all()]);
 });
 
 Route::get('/contact', function () {
@@ -37,26 +19,7 @@ Route::get('/contact', function () {
 });
 
 Route::get('/posts/{slug}', function ($slug) {
-    $posts = [
-        [
-            'id' => 1,
-            'slug' => 'Judul-artikel-1',
-            'title' => 'Judul',
-            'author' => 'Aileen',
-            'body' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat porro officiis ea eos quibusdam ab
-                laborum fuga repellendus maiores nemo tenetur, provident vitae minus ad? Beatae vitae reprehenderit
-                doloremque aut!'
-        ],
-        [
-            'id' => 2,
-            'slug' => 'Judul-artikel-2',
-            'title' => 'Judul',
-            'author' => 'Aileen',
-            'body' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat porro officiis ea eos quibusdam ab
-                laborum fuga repellendus maiores nemo tenetur, provident vitae minus ad? Beatae vitae reprehenderit
-                doloremque aut!'
-        ]
-    ];
+    $posts = Post::all();
 
     $post = Arr::first($posts, function($post) use ($slug){
         return $post['slug'] == $slug;
