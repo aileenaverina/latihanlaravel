@@ -18,10 +18,7 @@ Route::get('/contact', function () {
     return view('contact', ['title' => 'Contact Us']);
 });
 
-Route::get('/posts/{slug}', function ($slug) {
-    $posts = Post::all();
-
-    $post = Post::find($slug);
-
+Route::get('/posts/{post:slug}', function (Post $post) {
+    
     return view('post', ['title' => 'Single Post', 'post' => $post]);
 });
